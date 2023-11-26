@@ -1,4 +1,5 @@
 import numpy as np
+import ships as shp
 
 class Board:
     def __init__(self, ships : dict, player_name : str):
@@ -18,6 +19,7 @@ class Board:
 
         self.player = player_name
         self.ships = ships
+        self.placed_ships = []
 
         self.files = list('ABCDEFGHIJ')
         
@@ -41,6 +43,7 @@ class Board:
     
     def see_enemy_board(self):
         print(self.enemy_board)
+
     
     def place_ships(self):
         for ship in self.ships:
@@ -61,7 +64,6 @@ class Board:
             
             self.__place_ship(ship,position_to_place,direction)
 
-
     
     def __ask_player_for_position(self):
         position = input('Enter this ship starting position: (Example: A1)')
@@ -70,6 +72,7 @@ class Board:
         direction = input('In which direction you want to place it? H or V?')
 
         return position_to_place, direction
+
 
     def __place_ship(self, ship : str,  position_to_place : list, direction : str):
         size = self.ships[ship]['size']
@@ -81,8 +84,11 @@ class Board:
             self.board[file_to_place][column_to_place:column_to_place + size] = ship[0]
         elif direction == 'V':
             self.board.T[column_to_place][file_to_place:file_to_place + size] = ship[0] 
+        
+        self.__add_to_placed_ships(ship)
 
         print(f'Great!! Your {ship} was correctly placed!✅\n')
+
 
     def __position_is_empty(self, ship_size : int, position_to_place : list, direction : str):
         count_available = 0
@@ -111,3 +117,11 @@ class Board:
                     return True
             
         return False
+
+
+    def __add_to_placed_ships(self, ship_name : str):
+        size = self.ships[ship_name]['size']
+
+        ship = shp.Ship(ship_name, size)
+        ship.ship_gets_placed()
+        self.placed_ships.append(ship)

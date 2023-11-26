@@ -14,6 +14,7 @@ class BattleshipGame:
 
         self.save_manager = sm.SaveManager(self.game_name)
     
+    
     def start_game(self):
         print('Welcome to Battleship in Ptyhon!! ⚓⛵🚢\n')
         if self.save_manager.check_if_game_exists():
@@ -23,11 +24,13 @@ class BattleshipGame:
                 self.setup_game()
             elif load_setup == 'Y':
                 self.load_setup()
-                print(self.player1_board)
-                print(self.player2_board)
 
         else:
             self.setup_game()
+        
+        print('Setup Ready!😎')
+        print('Fantastic! Now let the game begin!\nBombs Away 💣💣💣\n')
+
 
     def setup_game(self):
         print(f'{self.player1} will start! 🎉\nPlease place all your ships!\n')
@@ -37,20 +40,22 @@ class BattleshipGame:
         self.player2_board.place_ships()
         
         self.save_setup()
-        print('Setup Ready!😎')
-        print('Fantastic! Now let the game begin!\nBombs Away 💣💣💣\n')
+
 
     # Save Manager methods
     def save_setup(self):
         self.save_manager.save_boards(self.player1_board.board, self.player2_board.board, True)
     
+
     def save_game(self):
         self.save_manager.save_boards(self.player1_board.board, self.player2_board.board, False)
     
+
     def load_setup(self):
         boards = self.save_manager.load_boards(True)
         self.player1_board = boards[0]
         self.player2_board = boards[1]
+    
     
     def load_game(self):
         boards = self.save_manager.load_boards(False)
@@ -61,4 +66,3 @@ class BattleshipGame:
 if __name__ == '__main__':
     game = BattleshipGame('Santi', 'Vane')
     game.start_game()
-
