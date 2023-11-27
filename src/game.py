@@ -7,7 +7,10 @@ class BattleshipGame:
     def __init__(self, player1_name : str, player2_name :str):
         self.player1 = player1_name
         self.player2 = player2_name
+
         self.game_name = self.player1 + ' vs ' + self.player2
+        self.game_turn = player1_name
+        self.game_completed = False
 
         self.player1_board = br.Board(shp.ships, self.player1)
         self.player2_board = br.Board(shp.ships, self.player2)
@@ -18,12 +21,16 @@ class BattleshipGame:
     def start_game(self):
         print('Welcome to Battleship in Ptyhon!! ⚓⛵🚢\n')
         if self.save_manager.check_if_game_exists():
-            load_setup = input('Do you want to use your previous Ships Setup? Y or N?\n')
+            if self.save_manager.check_if_game_is_being_played():
+                self.load_game()
+                
+            else:
+                load_setup = input('Do you want to use your previous Ships Setup? Y or N?\n')
 
-            if load_setup == 'N':
-                self.setup_game()
-            elif load_setup == 'Y':
-                self.load_setup()
+                if load_setup == 'N':
+                    self.setup_game()
+                elif load_setup == 'Y':
+                    self.load_setup()
 
         else:
             self.setup_game()

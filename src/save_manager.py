@@ -27,6 +27,13 @@ class SaveManager:
         
         return False
 
+    def check_if_game_is_being_played(self):
+        dir_list = os.listdir(self.game_name_path)
+        if self.board1_path in dir_list and self.board1_path in dir_list:
+            return True
+        
+        return False
+
     def create_game_folder(self):
         os.mkdir(self.game_name_path)
     
