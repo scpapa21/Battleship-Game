@@ -23,6 +23,9 @@ class BattleshipGame:
         if self.save_manager.check_if_game_exists():
             if self.save_manager.check_if_game_is_being_played():
                 self.load_game()
+                print('Loading Game ...')
+                print('Game Loaded!! Please continue your game!\nBombs Away 💣💣💣\n')
+                return
                 
             else:
                 load_setup = input('Do you want to use your previous Ships Setup? Y or N?\n')
@@ -37,6 +40,7 @@ class BattleshipGame:
         
         print('Setup Ready!😎')
         print('Fantastic! Now let the game begin!\nBombs Away 💣💣💣\n')
+        self.player_plays()
 
 
     def setup_game(self):
@@ -47,15 +51,24 @@ class BattleshipGame:
         self.player2_board.place_ships()
         
         self.save_setup()
+    
+
+    def player_plays(self):
+        self.player1_board.ships_summary()
+        self.player2_board.ships_summary()
+
+
+    def __check_winner(self):
+        pass
 
 
     # Save Manager methods
     def save_setup(self):
-        self.save_manager.save_boards(self.player1_board.board, self.player2_board.board, True)
+        self.save_manager.save_boards(self.player1_board, self.player2_board, True)
     
 
     def save_game(self):
-        self.save_manager.save_boards(self.player1_board.board, self.player2_board.board, False)
+        self.save_manager.save_boards(self.player1_board, self.player2_board.board, False)
     
 
     def load_setup(self):
