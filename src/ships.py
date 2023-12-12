@@ -15,7 +15,13 @@ class Ship:
 
     def display_information(self):
         life_percentage = (self.current_health / self.initial_health) * 100
-        print(f'This {self.name} has {life_percentage}% health remaining!')
+
+        if life_percentage == 0:
+            print(f'The {self.name} has been destroyed! 😵😢😵')
+        elif life_percentage <= 30:
+            print(f'Your {self.name} is about to be destroyed! 😰😰 It only has {life_percentage}% health remaining!')
+        else:
+            print(f'Your {self.name} has {life_percentage}% health remaining!')
 
     def ship_gets_placed(self):
         self.placed = True
