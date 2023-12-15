@@ -1,4 +1,4 @@
-import game as gm
+from game import BattleshipGame
 
-game = gm.BattleshipGame('Santi','Vane')
+game = BattleshipGame('Santi','Vane')
 game.start_game()

@@ -1,5 +1,5 @@
 import numpy as np
-import ships as shp
+from ships import Ship
 
 class Board:
     def __init__(self, ships : dict, player_name : str):
@@ -119,6 +119,7 @@ class Board:
         if letter_or_number == 'number':
             return character.isdigit()
 
+
     def __check_valid_position(self, letter : str, number : int):
         if letter.upper() not in self.files:
             return False
@@ -143,6 +144,7 @@ class Board:
         self.__add_to_placed_ships(ship)
 
         print(f'Great!! Your {ship} was correctly placed!✅\n')
+
 
     def __position_is_empty(self, ship_size : int, position_to_place : list, direction : str):
         count_available = 0
@@ -176,7 +178,7 @@ class Board:
     def __add_to_placed_ships(self, ship_name : str):
         size = self.ships[ship_name]['size']
 
-        ship = shp.Ship(ship_name, size)
+        ship = Ship(ship_name, size)
         ship.ship_gets_placed()
         self.placed_ships.append(ship)
     
@@ -200,7 +202,7 @@ class Board:
 
 
     # Ships Summary Methods
-    def __give_ship_summary(self, ship : shp.Ship):
+    def __give_ship_summary(self, ship : Ship):
         ship.display_information()
 
 
