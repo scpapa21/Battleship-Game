@@ -1,9 +1,3 @@
-ships = {'Carrier': {'size' : 5}, 
-         'Battleship' : {'size' : 4},
-         'Destroyer': {'size': 3},
-         'Submarine': {'size': 3},
-         'Patrol Boat': {'size': 2}}
-
 class Ship:
     def __init__(self, name, size):
         self.name = name
@@ -14,7 +8,7 @@ class Ship:
         self.destroyed = False
 
     def display_information(self):
-        life_percentage = (self.current_health / self.initial_health) * 100
+        life_percentage = (self.current_health // self.initial_health) * 100
 
         if life_percentage == 0:
             print(f'The {self.name} has been destroyed! 😵😢😵')
